@@ -26,7 +26,7 @@ export const headerWithoutToken = () => {
 // Axios Instance
 export const clientWithoutAuth = Axios.create({
     baseURL: `${BE_ENDPOINT}`,
-    headers: headerWithoutToken(),
+    headers: headerWithoutToken()
 });
 
 
@@ -52,9 +52,21 @@ clientWithAuth.interceptors.response.use(
         handleError(error);
         return Promise.reject(error);
     }
-  );
+);
   
 
 export function unwrapResp<T>(res: AxiosResponse<T>): T {
     return res.data;
 }
+
+clientWithoutAuth.interceptors.response.use(
+    (response) => response,
+    (error: AxiosError<any>) => {
+        const config = error.config as CustomAxiosRequestConfig;
+        if (config?.skipGlobalErrorHandler) {
+          return Promise.reject(error);
+        }
+        handleError(error);
+        return Promise.reject(error);
+    }
+);

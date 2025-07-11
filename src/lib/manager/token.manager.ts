@@ -3,7 +3,6 @@ export function storeTokenLocalStorage(token : string){
 }
 
 export function getTokenFromLocalStorage() : string | null{
-    return "dummy-token";
-    // return localStorage.getItem("token")
+    return localStorage.getItem("token")
 }
 
