@@ -30,7 +30,7 @@ export default function DashboardLayout({
         <Navbar/>
         <Sidebar />
         <BreadcrumbNavigation/>
-        <main>{children}</main>
+        <main className="m-[50px]">{children}</main>
     </>
   );
 }

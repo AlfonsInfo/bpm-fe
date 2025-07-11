@@ -57,7 +57,12 @@ export default function Sidebar() {
                 >
                     Group Cells
                 </Link>
-
+                <Link
+                    href="/dashboard/articles"
+                    className="block w-full px-4 py-2 rounded text-left hover:bg-gray-100 font-medium"
+                >
+                    Articles
+                </Link>
                 {/* Menu with Submenu */}
                 <button
                     onClick={() => setIsEventOpen((prev) => !prev)}

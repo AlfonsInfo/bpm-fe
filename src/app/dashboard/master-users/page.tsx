@@ -29,29 +29,29 @@ export default function MasterUsersPage() {
           onClick={showCreateDialog}
       />
       </MasterDataHeaderLayout>
-        <DataTable
-          loading={isFetchingUsers}
-          value={users}
-          paginator
-          rows={rows}
-          first={first}
-          onPage={(e) => {
-            setFirst(e.first);
-            setRows(e.rows);
-          }}
-          className="p-datatable-sm shadow"
-        >
-          <Column field="name" header="Name" sortable />
-          <Column field="wa_number"  header="Whatsapp Number" />
-          <Column field="email"  header="Email" />
-          <Column header="Action"/>
-        </DataTable>
-        <>
+          <DataTable
+            loading={isFetchingUsers}
+            value={users}
+            paginator
+            rows={rows}
+            first={first}
+            onPage={(e) => {
+              setFirst(e.first);
+              setRows(e.rows);
+            }}
+            className="p-datatable-sm shadow"
+          >
+            <Column field="name" header="Name" sortable />
+            <Column field="wa_number"  header="Whatsapp Number" />
+            <Column field="email"  header="Email" />
+            <Column header="Action"/>
+          </DataTable>
+          <>
           {/* <CreateEventDialog  
                 visible={visibleEventCreateDialog}
                 onHide={hideDialog}
-            /> */}
+                /> */}
         </>
-    </div>
+      </div>
   );
 }
