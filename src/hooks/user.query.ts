@@ -1,6 +1,4 @@
-import { AxiosResponse } from 'axios';
 import {  User } from '@/interfaces/dto.interface';
-import { clientWithAuth, unwrapResp } from '@/lib/client/axios.instance';
 import { getUsers } from '@/service/user.service';
 import { useQuery } from '@tanstack/react-query';
 

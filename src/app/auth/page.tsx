@@ -1,17 +1,18 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useLogin } from '@/hooks/auth.mutate';
+import { Button } from 'primereact/button';
 import { useState } from 'react';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const { login, isLoadingLogin } = useLogin();
+  
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Logika login
-    alert(`Email: ${email}\nPassword: ${password}`);
+    login({ email, password }); 
   }
 
   return (
@@ -49,9 +50,9 @@ export default function LoginPage() {
         />
 
         <Button
+          loading={isLoadingLogin}
           type="submit"
-          className="w-full rounded bg-indigo-600 py-2 text-white hover:bg-indigo-700"
-        >
+         >
           Sign In
         </Button>
       </form>
