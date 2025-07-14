@@ -18,7 +18,7 @@ export default function LandingPageHeader() {
       >
         <section className="h-screen bg-[url('https://picsum.photos/1920/1920?random')] bg-cover *:drop-shadow flex items-center justify-center text-white">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl font-extrabold text-white mb-4">
+            <h1 className="text-4xl font-extrabold text-white mb-4 ">
               Empower Young Catholics
             </h1>
             <p className="text-lg text-white mb-6 max-w-2xl mx-auto">

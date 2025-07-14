@@ -1,6 +1,7 @@
 import { Image } from "primereact/image";
 import { Card } from "primereact/card";
 
+
 export default function Home() {
   return (
     <main>
