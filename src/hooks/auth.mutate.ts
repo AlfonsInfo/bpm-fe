@@ -1,10 +1,12 @@
+"use client"
 import { LoginRequest, LoginResponse } from '@/interfaces/dto.interface';
-import { storeTokenLocalStorage } from '@/lib/manager/token.manager';
+import {storeToken } from '@/lib/manager/token.manager';
 import { loginService, validateToken } from '@/service/auth.service';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { useAuthStore } from './auth.state';
 
 export const USE_GET_USER = "user-get-user";
 
@@ -12,12 +14,13 @@ export const endpointUsers = "/v1/users";
 
 export const useLogin = () => {
     const router = useRouter();
-
+    const setPassProcessLogin = useAuthStore((state) => state.setPassProcessLogin);
     const { mutate : login, isPending : isLoadingLogin } = useMutation({
         mutationKey : ["login"],
         mutationFn : (credential : LoginRequest) => loginService(credential),
-        onSuccess: (response) => {
-            storeTokenLocalStorage(response.token);
+        onSuccess:  (response) => {
+            storeToken(response.token);
+            setPassProcessLogin(true);
             toast.success("Login Berhasil");
             router.push("/dashboard");
             router.refresh();
@@ -26,9 +29,7 @@ export const useLogin = () => {
     return {login, isLoadingLogin};
 }
 
-export const useValidateToken = () => {
-  const router = useRouter();
-
+export const useValidateToken = ({ enabled = true }: { enabled?: boolean } = {}) => {
   const {
     data: validate,
     isLoading,
@@ -38,7 +39,8 @@ export const useValidateToken = () => {
   } = useQuery<LoginResponse, Error>({
     queryKey: ["validateToken"],
     queryFn: validateToken,
-    retry: false,
+    retry:false,
+    enabled  :enabled,
     throwOnError : (error,query) => {
       return false;
     },

@@ -1,8 +1,12 @@
-export function storeTokenLocalStorage(token : string){
-    localStorage.setItem("token",token)
+"use client"
+
+
+export function storeToken(token : string){
+    localStorage.setItem("token",token);
 }
 
-export function getTokenFromLocalStorage() : string | null{
-    return localStorage.getItem("token")
-}
+export const getTokenFromLocalStorage = (): string | null => {
+  if (typeof window === "undefined") return null; 
+  return localStorage.getItem("token");
+};
 
