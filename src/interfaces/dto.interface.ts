@@ -37,6 +37,22 @@ export interface Event {
   is_active: boolean
 }
 
+export type ArticleStatus = "DRAFT" | "PUBLISHED" | "ARCHIVED"; // sesuaikan enum dari backend
+
+export interface Article {
+  id: number;
+  title: string;
+  content: string;
+  status: ArticleStatus;
+  published_at: string;
+  is_active: boolean;     
+  author_id: string;      
+  view_count: number;
+  created_at: string;
+  updated_at: string;
+  deleted_at?: string | null; 
+}
+
 export interface User {
   id: number
   name: string

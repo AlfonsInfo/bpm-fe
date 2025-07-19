@@ -1,3 +1,5 @@
+"use client"
+
 import Axios, {  AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { getTokenFromLocalStorage } from "../manager/token.manager";
 import toast from "react-hot-toast";
@@ -11,6 +13,7 @@ export const BE_ENDPOINT = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:
 
 // header
 export const headerWithToken = () => {
+    console.log("header with token created")
     return {
         "Content-Type": "application/json",
         Authorization: `Bearer ${getTokenFromLocalStorage()}`,
@@ -31,8 +34,7 @@ export const clientWithoutAuth = Axios.create({
 
 
 export const clientWithAuth = Axios.create({
-    baseURL: `${BE_ENDPOINT}`,
-    headers: {...headerWithToken()}
+    baseURL: `${BE_ENDPOINT}`
 });
 
 
@@ -70,3 +72,11 @@ clientWithoutAuth.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
+clientWithAuth.interceptors.request.use((config) =>{
+    const token = getTokenFromLocalStorage();
+    if(token){
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+})
